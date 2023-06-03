@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blc/bloc/internet/internet_state.dart';
-import 'package:flutter_blc/bloc/internet_bloc.dart';
+import 'package:flutter_blc/cubit/internet_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatelessWidget {
@@ -13,11 +12,11 @@ class HomePage extends StatelessWidget {
         title: const Text("BLOCK"),
       ),
       body: Center(
-        child: BlocBuilder<InternetBloc, InternetState>(
+        child: BlocBuilder<InternetCubit, InternetState>(
           builder: (context, state) {
-            if (state is InternetLossState) {
+            if (state == InternetState.loss) {
               return const Text("No Connection");
-            } else if (state is InternetGainedState) {
+            } else if (state == InternetState.gain) {
               return const Text("Connection");
             } else {
               return const Text("Loading...");
